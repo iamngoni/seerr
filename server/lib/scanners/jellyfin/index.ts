@@ -1,3 +1,4 @@
+import logger from '@server/logger';
 import animeList from '@server/api/animelist';
 import type {
   JellyfinLibraryItem,
@@ -435,7 +436,7 @@ class JellyfinScanner
     }
   }
 
-  private async processMusic(jellyfinitem: JellyfinLibraryItem) {
+  private async processMusicItem(jellyfinitem: JellyfinLibraryItem) {
     const mediaRepository = getRepository(Media);
     const musicBrainz = new MusicBrainz();
 
@@ -541,7 +542,7 @@ class JellyfinScanner
     } else if (item.Type === 'Series') {
       await this.processJellyfinShow(item);
     } else if (item.Type === 'MusicAlbum') {
-      await this.processMusic(item);
+      await this.processMusicItem(item);
     }
   }
 
